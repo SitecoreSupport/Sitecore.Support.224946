@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FormController.cs" />
+    <Compile Include="InitializeRoutes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WffmLimitMultipleSubmits.cs" />
   </ItemGroup>

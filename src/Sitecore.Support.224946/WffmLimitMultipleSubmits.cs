@@ -6,7 +6,7 @@ using System.Text;
 using System.Web.Caching;
 using System.Web.Mvc;
 
-namespace Sitecore.Forms.Mvc.Controllers.Filters
+namespace Sitecore.Support.Forms.Mvc.Controllers.Filters
 {
   [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
   internal class WffmLimitMultipleSubmitsAttribute : FilterAttribute, IAuthorizationFilter
@@ -48,9 +48,12 @@ namespace Sitecore.Forms.Mvc.Controllers.Filters
 
     public string CalculateMD5Hash(string input)
     {
-      MD5 mD = MD5.Create();
+      var cryptoProvider = new SHA1CryptoServiceProvider();
+      //MD5 mD = MD5.Create();
       byte[] bytes = Encoding.ASCII.GetBytes(input);
-      byte[] array = mD.ComputeHash(bytes);
+      //byte[] array = mD.ComputeHash(bytes);
+      byte[] array = cryptoProvider.ComputeHash(bytes);
+      Array.Resize(ref array, 16);
       StringBuilder stringBuilder = new StringBuilder();
       for (int i = 0; i < array.Length; i++)
       {

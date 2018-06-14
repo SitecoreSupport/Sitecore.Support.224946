@@ -14,7 +14,7 @@ using Sitecore.WFFM.Abstractions.Shared;
 using System.IO;
 using System.Web.Mvc;
 
-namespace Sitecore.Forms.Mvc.Controllers
+namespace Sitecore.Support.Forms.Mvc.Controllers
 {
   [ModelBinder(typeof(FormModelBinder))]
   public class FormController : SitecoreController
@@ -40,7 +40,7 @@ namespace Sitecore.Forms.Mvc.Controllers
     }
 
     public FormController()
-        : this((IRepository<FormModel>)Factory.CreateObject(Constants.FormRepository, true), (IAutoMapper<IFormModel, FormViewModel>)Factory.CreateObject(Constants.FormAutoMapper, true), (IFormProcessor<FormModel>)Factory.CreateObject(Constants.FormProcessor, true), DependenciesManager.AnalyticsTracker)
+        : this((IRepository<FormModel>)Factory.CreateObject(Sitecore.Forms.Mvc.Constants.FormRepository, true), (IAutoMapper<IFormModel, FormViewModel>)Factory.CreateObject(Sitecore.Forms.Mvc.Constants.FormAutoMapper, true), (IFormProcessor<FormModel>)Factory.CreateObject(Sitecore.Forms.Mvc.Constants.FormProcessor, true), DependenciesManager.AnalyticsTracker)
     {
     }
 
@@ -66,7 +66,7 @@ namespace Sitecore.Forms.Mvc.Controllers
     [SubmittedFormHandler]
     [FormErrorHandler]
     [HttpPost]
-    [WffmLimitMultipleSubmits]
+    [Sitecore.Support.Forms.Mvc.Controllers.Filters.WffmLimitMultipleSubmits]
     [WffmValidateAntiForgeryToken]
     public virtual ActionResult Index([ModelBinder(typeof(FormModelBinder))] FormViewModel formViewModel)
     {
